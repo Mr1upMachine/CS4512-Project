@@ -3,13 +3,13 @@
 #include <dirent.h>
 #include "mycommands.h"
 
-int cat(char *args[]) {
+int cat(char *argv[]) {
     FILE *fptr;
     char c;
     // Open first file for reading
-    fptr = fopen(args[1], "r");
+    fptr = fopen(argv[1], "r");
     if (fptr == NULL) {
-        printf("cat: %s: No such file or directory\n", args[1]);
+        printf("cat: %s: No such file or directory\n", argv[1]);
         return 1;
     }
 
@@ -28,21 +28,21 @@ int clear() {
     printf("\033[2J"); //clears terminal for Linux
 }
 
-int cp(char *args[]) {
+int cp(char *argv[]) {
     FILE *fptr1, *fptr2;
     char c;
 
     // Open first file for reading
-    fptr1 = fopen(args[1], "r");
+    fptr1 = fopen(argv[1], "r");
     if (fptr1 == NULL) {
-        printf("Cannot find file %s \n", args[1]);
+        printf("Cannot find file %s \n", argv[1]);
         return 1;
     }
 
     // Opens other file for writing
-    fptr2 = fopen(args[2], "w");
+    fptr2 = fopen(argv[2], "w");
     if (fptr2 == NULL) {
-        printf("Cannot open file %s \n", args[2]);
+        printf("Cannot open file %s \n", argv[2]);
         return 1;
     }
 

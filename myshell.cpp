@@ -8,36 +8,37 @@ char **split_args(char *command);
 
 int main() {
     char *command;
-    char **args;
+    char **argv;
+    int *argc;
 
     do {
         printf("> ");
         command = read_line();
-        args = split_args(command);
+        argv = split_args(command);
 
-        if(strcmp(args[0], "cat") == 0) {
-            cat(args);
+        if(strcmp(argv[0], "cat") == 0) {
+            cat(argv);
             printf("\n");
         }
-        else if(strcmp(args[0], "clear") == 0) {
+        else if(strcmp(argv[0], "clear") == 0) {
             clear();
         }
-        else if(strcmp(args[0], "cp") == 0) {
-            cp(args);
+        else if(strcmp(argv[0], "cp") == 0) {
+            cp(argv);
         }
-        else if(strcmp(args[0], "echo") == 0) {
+        else if(strcmp(argv[0], "echo") == 0) {
             echo(command);
         }
-        else if(strcmp(args[0], "exit") == 0) {
+        else if(strcmp(argv[0], "exit") == 0) {
             return 0;
         }
-        else if(strcmp(args[0], "grep") == 0) {
-            grep(args);
+        else if(strcmp(argv[0], "grep") == 0) {
+            grep(argv);
         }
-        else if(strcmp(args[0], "help") == 0) {
+        else if(strcmp(argv[0], "help") == 0) {
             printf("cat filename\nclear\ncp file1 file2\necho [string]\nexit\ngrep pattern file1 file2 ...\nhelp\nls [-l]\n");
         }
-        else if(strcmp(args[0], "ls") == 0) {
+        else if(strcmp(argv[0], "ls") == 0) {
             ls();
             printf("\n");
         }
