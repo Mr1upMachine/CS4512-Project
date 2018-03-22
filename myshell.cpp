@@ -6,12 +6,15 @@
 char *read_line(void);
 char **split_args(char *command);
 
+#define ANSI_COLOR_RED     "\u001b[31;1m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 int main() {
     char *command;
     char **argv;
     int *argc;
 
     do {
+        printf(ANSI_COLOR_RED  "This text is RED!"  ANSI_COLOR_RESET  "\n");
         printf("> ");
         command = read_line();
         argv = split_args(command);
