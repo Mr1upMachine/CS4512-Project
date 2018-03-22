@@ -11,7 +11,7 @@ int cp(char *argv[]);
 int echo(char argv[]);
 
 //Postcondition: preforms grep command and returns 0 if successful or other if task not preformed
-int grep(char *argv[]);
+int grep(char *argv[], int argc);
 
 //Postcondition: preforms ls command and returns 0 if successful or other if task not preformed
 int ls();

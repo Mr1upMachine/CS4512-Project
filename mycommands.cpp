@@ -62,7 +62,8 @@ int echo(char *command) {
     printf("%s", command + 5);
 }
 
-int grep(char *argv[]) {
+int grep(char *argv[], int argc) {
+    printf("%i",argc);
     FILE *fp;
     char line[100];
     
