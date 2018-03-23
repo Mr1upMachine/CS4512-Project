@@ -4,7 +4,7 @@
 #include "mycommands.h"
 
 int cat(char *argv[], int argc) {
-    const end = argc-2;
+    const int end = argc-2;
     for(int i=1; i<end; i++) {
         FILE *fptr;
         char c;

@@ -20,7 +20,7 @@ int main() {
         argv = split_args(command, argc);
 
         if(strcmp(argv[0], "cat") == 0) {
-            cat(argv, argc);
+            cat(argv, *argc);
             printf("\n");
         }
         else if(strcmp(argv[0], "clear") == 0) {
