@@ -63,27 +63,25 @@ int echo(char *command) {
 }
 
 int grep(char *argv[], int argc) {
-    printf("%i",argc);
-    FILE *fp;
-    char line[100];
-    
-    //open the file
-    fp = fopen(argv[2],"r");
+    for(int i=2; i<argc; i++) {
+        FILE *fp;
+        char *line = NULL;
+        size_t len = 0;
+        ssize_t read;
 
-    //find line with string
-    while(fscanf(fp , "%[^\n]\n" , line)!=EOF)
-    {
-        if(strstr(line , argv[1]) !=NULL)
-        {
-            //print found line
-            printf("%s\n" , line);
+        fp = fopen(argv[i], "r");
+        if (fp == NULL)
+            printf("File %s not found", argv[i]);
+
+        while ((read = getline(&line, &len, fp)) != -1) {
+            // printf("Retrieved line of length %zu :\n", read);
+            if (strstr(line, argv[1])) {
+                printf("%s", line);
+            }
         }
-        else
-        {
-            continue;
-        }
+
+        fclose(fp);
     }
-    fclose(fp);
 }
 
 int ls() {
