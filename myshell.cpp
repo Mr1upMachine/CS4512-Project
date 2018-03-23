@@ -13,6 +13,7 @@ int main() {
     char **argv;
     int *argc;
 
+    printf("Welcome to our shell Program!");
     do {
         //printf(ANSI_COLOR_RED  "This text is RED!"  ANSI_COLOR_RESET  "\n");
         printf("> ");
