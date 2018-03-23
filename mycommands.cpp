@@ -4,24 +4,55 @@
 #include "mycommands.h"
 
 int cat(char *argv[], int argc) {
-    const int end = argc-2;
-    for(int i=1; i<end; i++) {
-        FILE *fptr;
-        char c;
-        // Open first file for reading
-        fptr = fopen(argv[i], "r");
-        if (fptr == NULL) {
-            printf("cat: %s: No such file or directory\n", argv[i]);
+    if(strcmp(argv[argc - 2], ">") == 0) {
+        FILE *output;
+        output = fopen(argv[argc - 1], "w");
+        if (output == NULL) {
+            printf("cat: Output file cannot be opened");
             return 1;
         }
 
-        c = fgetc(fptr);
-        while (c != EOF) {
-            printf("%c", c);
-            c = fgetc(fptr);
-        }
+        const int end = argc-2;
+        for(int i=1; i<end; i++) {
+            FILE *input;
+            char c;
+            // Open first file for reading
+            input = fopen(argv[i], "r");
+            if (input == NULL) {
+                printf("cat: %s: No such file or directory\n", argv[i]);
+                return 1;
+            }
 
-        fclose(fptr);
+            c = fgetc(input);
+            while (c != EOF) {
+                fprintf(output,"%c", c);
+                c = fgetc(input);
+            }
+
+            fclose(input);
+        }
+        fclose(output);
+    }
+    else {
+        for(int i=1; i<argc; i++) {
+            FILE *input;
+            char c;
+            // Open first file for reading
+            input = fopen(argv[i], "r");
+            if (input == NULL) {
+                printf("cat: %s: No such file or directory\n", argv[i]);
+                return 1;
+            }
+
+            c = fgetc(input);
+            while (c != EOF) {
+                printf("%c", c);
+                c = fgetc(input);
+            }
+
+            fclose(input);
+            printf("\n");
+        }
     }
     return 0;
 }
