@@ -3,29 +3,32 @@
 #include <dirent.h>
 #include "mycommands.h"
 
-int cat(char *argv[]) {
-    FILE *fptr;
-    char c;
-    // Open first file for reading
-    fptr = fopen(argv[1], "r");
-    if (fptr == NULL) {
-        printf("cat: %s: No such file or directory\n", argv[1]);
-        return 1;
-    }
+int cat(char *argv[], int argc) {
+    const end = argc-2;
+    for(int i=1; i<end; i++) {
+        FILE *fptr;
+        char c;
+        // Open first file for reading
+        fptr = fopen(argv[i], "r");
+        if (fptr == NULL) {
+            printf("cat: %s: No such file or directory\n", argv[i]);
+            return 1;
+        }
 
-    c = fgetc(fptr);
-    while (c != EOF) {
-        printf("%c", c);
         c = fgetc(fptr);
+        while (c != EOF) {
+            printf("%c", c);
+            c = fgetc(fptr);
+        }
+
+        fclose(fptr);
     }
-
-    fclose(fptr);
-
     return 0;
 }
 
 int clear() {
     printf("\033[2J"); //clears terminal for Linux
+    return 0;
 }
 
 int cp(char *argv[]) {
@@ -60,6 +63,7 @@ int cp(char *argv[]) {
 
 int echo(char *command) {
     printf("%s", command + 5);
+    return 0;
 }
 
 int grep(char *argv[], int argc) {
@@ -70,11 +74,12 @@ int grep(char *argv[], int argc) {
         ssize_t read;
 
         fp = fopen(argv[i], "r");
-        if (fp == NULL)
+        if (fp == NULL) {
             printf("File %s not found", argv[i]);
+            return 1;
+        }
 
         while ((read = getline(&line, &len, fp)) != -1) {
-            // printf("Retrieved line of length %zu :\n", read);
             if (strstr(line, argv[1])) {
                 printf("%s", line);
             }
@@ -82,6 +87,7 @@ int grep(char *argv[], int argc) {
 
         fclose(fp);
     }
+    return 0;
 }
 
 int ls() {
@@ -96,4 +102,5 @@ int ls() {
         }
         closedir(d);
     }
+    return 0;
 }

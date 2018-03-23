@@ -1,5 +1,5 @@
 //Postcondition: preforms cat command and returns 0 if successful or other if task not preformed
-int cat(char *argv[]);
+int cat(char *argv[], int argc);
 
 //Postcondition: clears out the terminal's current text
 int clear();
