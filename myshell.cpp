@@ -13,7 +13,7 @@ int main() {
     char **argv;
     int *argc;
 
-    printf("Welcome to our shell Program!");
+    printf("Welcome to our shell Program!\n");
     do {
         //printf(ANSI_COLOR_RED  "This text is RED!"  ANSI_COLOR_RESET  "\n");
         printf("> ");
@@ -55,8 +55,9 @@ int main() {
     } while(true);
 }
 
+#define LINE_BUFSIZE 256
 char *read_line(void) {
-    char *line = NULL;
+    char *line = (char*)malloc(LINE_BUFSIZE);
     size_t bufsize = 0; // have getline allocate a buffer for us
     getline(&line, &bufsize, stdin);
     return line;
