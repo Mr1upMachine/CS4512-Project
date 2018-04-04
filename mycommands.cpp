@@ -92,6 +92,41 @@ int cp(char *argv[]) {
     return 0;
 }
 
+int diff(char *argv[], int argc) {
+    FILE *fp1, *fp2;
+    int MAXLINE = 200;
+    char filebuff[MAXLINE];
+    char filebuff2[MAXLINE];
+    int linecount = 0;
+
+    fp1 = fopen(argv[1], "r");
+    fp2 = fopen(argv[2], "r");
+
+    if(argc != 3)
+    {
+        printf("Wrong use of diff! Ex: diff File1 File2");
+        return 0;
+    }
+
+    if (fp1 == NULL)
+        printf("File %s not found", argv[1]);
+
+    if (fp2 == NULL)
+        printf("File %s not found", argv[2]);
+
+
+    while (((fgets(filebuff, MAXLINE, fp1)) != NULL && (fgets(filebuff2, MAXLINE, fp2))) != NULL) {
+        if (strcmp(filebuff, filebuff2) != 0){
+            printf("The files differ on line: %i\n", linecount);
+            printf("File 1: %s\nFile 2: %s", filebuff, filebuff2);
+        }
+        ++linecount;
+    }
+    fclose(fp1);
+    fclose(fp2);
+    return 0;
+}
+
 int echo(char *command) {
     printf("%s", command + 5);
     return 0;

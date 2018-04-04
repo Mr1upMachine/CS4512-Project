@@ -29,6 +29,9 @@ int main() {
         else if(strcmp(argv[0], "cp") == 0) {
             cp(argv);
         }
+        else if(strcmp(argv[0], "diff") == 0) {
+            diff(argv, *argc);
+        }
         else if(strcmp(argv[0], "echo") == 0) {
             echo(command);
         }
