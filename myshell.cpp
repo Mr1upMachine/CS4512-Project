@@ -55,7 +55,7 @@ int main() {
     } while(true);
 }
 
-#define LINE_BUFSIZE 256
+#define LINE_BUFSIZE 1024
 char *read_line(void) {
     char *line = (char*)malloc(LINE_BUFSIZE);
     fgets(line, LINE_BUFSIZE, stdin);
