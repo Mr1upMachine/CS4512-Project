@@ -57,9 +57,8 @@ int main() {
 
 #define LINE_BUFSIZE 256
 char *read_line(void) {
-    char *line = NULL;
-    size_t bufsize = 0; // have getline allocate a buffer for us
-    getline(&line, &bufsize, stdin);
+    char *line = (char*)malloc(LINE_BUFSIZE);
+    fgets(line, LINE_BUFSIZE, stdin);
     return line;
 }
 
