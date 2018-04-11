@@ -132,6 +132,10 @@ int echo(char *command) {
     return 0;
 }
 
+int env(char *argv[], int argc) {
+    
+}
+
 int grep(char *argv[], int argc) {
     for(int i=2; i<argc; i++) {
         FILE *fp;
@@ -156,6 +160,10 @@ int grep(char *argv[], int argc) {
     return 0;
 }
 
+int kill(char *argv[], int argc) {
+    
+}
+
 int ls() {
     DIR *d;
     struct dirent *dir;
@@ -169,4 +177,28 @@ int ls() {
         closedir(d);
     }
     return 0;
+}
+
+int mkdir(char *argv[], int argc) {
+
+}
+
+int rmdir(char *argv[], int argc) {
+
+}
+
+int sleep(char *argv[], int argc) {
+
+}
+
+int stat(char *argv[], int argc) {
+
+}
+
+int timeout(char *argv[], int argc) {
+
+}
+
+int wait(char *argv[], int argc) {
+
 }
