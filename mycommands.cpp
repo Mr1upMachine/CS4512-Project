@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include "mycommands.h"
 
 int cat(char *argv[], int argc) {
@@ -115,7 +117,7 @@ int diff(char *argv[], int argc) {
         printf("File %s not found", argv[2]);
 
 
-    while (((fgets(filebuff, MAXLINE, fp1)) != NULL && (fgets(filebuff2, MAXLINE, fp2))) != NULL) {
+    while (((fgets(filebuff, MAXLINE, fp1)) && (fgets(filebuff2, MAXLINE, fp2)))) { //TODO check if this still works
         if (strcmp(filebuff, filebuff2) != 0){
             printf("The files differ on line: %i\n", linecount);
             printf("File 1: %s\nFile 2: %s", filebuff, filebuff2);
@@ -180,7 +182,10 @@ int ls() {
 }
 
 int mkdir(char *argv[], int argc) {
-
+    if(mkdir(argv[1], 0777) == 0)
+        return 0;
+    printf("Directory \"%s\" already exists\n", argv[1]);
+    return -1;
 }
 
 int rmdir(char *argv[], int argc) {
@@ -201,4 +206,13 @@ int timeout(char *argv[], int argc) {
 
 int wait(char *argv[], int argc) {
 
+}
+
+
+//Utility methods
+int isValidDir(char path[]) {
+    struct stat st = {0};
+    if (stat(path, &st) == -1)
+        return 0;
+    return -1;
 }
