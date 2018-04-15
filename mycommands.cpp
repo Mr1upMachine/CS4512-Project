@@ -221,6 +221,7 @@ int ls(char *cDir) {
     return 0;
 }
 
+//TODO verify if directory support works
 int mkdir(char *argv[], int argc, char *cDir) {
     if( mkdir(dirBuilder(cDir, argv[1]), 0777) == 0 )
         return 0;
@@ -251,7 +252,7 @@ int wait(char *argv[], int argc) {
 
 //Utility methods
 char* dirBuilder(char *cDir, char *dest) {
-    //TODO .. does not work with chaining
+    //TODO .. does not work with chaining, create better parsing algo that transforms path all at once
     if(dest[0] == '~') { //home path
         return getenv("HOME");
     }

@@ -72,4 +72,5 @@ int wait(char *argv[], int argc);
 //Postcondition: returns 0 if successful
 char* dirBuilder(char *cDir, char *dest);
 
+//doesn't seem to work?
 int isDirectory(const char *path);
