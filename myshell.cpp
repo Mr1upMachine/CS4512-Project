@@ -57,7 +57,7 @@ int main() {
         else if(strcmp(argv[0], "wait") == 0)
             wait(argv, *argc);
         else
-            printf("Command not recognised, type help for valid commands\n");
+            printf("Command not recognised, type \"help\" for valid commands\n");
     } while(true);
 }
 
