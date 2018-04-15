@@ -6,6 +6,8 @@
 #include <sys/stat.h>
 #include "mycommands.h"
 
+struct stat info;
+
 int cat(char *argv[], int argc) {
     if(strcmp(argv[argc - 2], ">") == 0) {
         FILE *output;
@@ -61,7 +63,15 @@ int cat(char *argv[], int argc) {
 }
 
 int cd(char *argv[], char *cDir) {
-    cDir = dirBuilder(cDir, argv[1]);
+    char *nDir = (char*)malloc(sizeof(char) * STR_BUFSIZE);
+    strcpy(nDir, dirBuilder(cDir, argv[1]));
+
+    if( stat( nDir, &info ) != 0 )
+        printf( "cannot access %s\n", argv[1] );
+    else if( info.st_mode & S_IFDIR )
+        strcpy(cDir, nDir);
+    else
+        printf( "%s is not a directory\n", argv[1] );
 }
 
 void clear() {
@@ -202,13 +212,12 @@ int ls(char *cDir) {
         }
         closedir(d);
     }
+    printf("\n");
     return 0;
 }
 
 int mkdir(char *argv[], int argc, char *cDir) {
-    char* nDir = dirBuilder(cDir, argv[1]);
-
-    if(mkdir(nDir, 0777) == 0)
+    if( mkdir(dirBuilder(cDir, argv[1]), 0777) == 0 )
         return 0;
     printf("Directory \"%s\" already exists\n", argv[1]);
     return -1;
@@ -238,7 +247,6 @@ int wait(char *argv[], int argc) {
 //Utility methods
 char* dirBuilder(char *cDir, char *dest) {
     //TODO .. does not work with chaining
-    //TODO mystery character at end of return string
     if(dest[0] == '~') { //home path
         return getenv("HOME");
     }
@@ -246,7 +254,7 @@ char* dirBuilder(char *cDir, char *dest) {
         return dest;
     }
 
-    char *nDir;
+    char *nDir = (char*)malloc(sizeof(char) * STR_BUFSIZE);
 
     if(dest[0] == '.' && dest[1] == '.') { //parent path
         int index = -1;
@@ -254,11 +262,16 @@ char* dirBuilder(char *cDir, char *dest) {
         for (int i = 0; i < len; i++)
             if (cDir[i] == '/')
                 index = i;
-        strncpy(nDir, cDir, index);
+        if(index == 0)
+            strcpy(nDir, "/");
+        else
+            strncpy(nDir, cDir, index);
         return nDir;
     }
     else {
-        strncpy(nDir, cDir, strlen(cDir));
+        if(strcmp(cDir, "/") != 0)
+            strcpy(nDir, cDir);
+        strcat(nDir, "/");
         strcat(nDir, dest);
         return nDir;
     }

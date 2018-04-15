@@ -10,7 +10,7 @@
 #define COLOR_WHITE   "\u001b[37m"
 #define COLOR_RESET   "\x1b[0m"
 
-//General constants
+//General constants & structs
 #define STR_BUFSIZE 1024
 #define TOKEN_BUFSIZE 64
 #define TOKEN_DELIM " \t\r\n\a"
@@ -18,7 +18,6 @@
 //Postcondition: preforms cat command and returns 0 if successful or other if task not preformed
 int cat(char *argv[], int argc);
 
-//TODO do this
 int cd(char *argv[], char *cDir);
 
 //Postcondition: clears out the terminal's current text
