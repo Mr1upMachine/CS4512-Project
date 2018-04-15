@@ -22,23 +22,23 @@ int main() {
             continue;
         else if(strcmp(argv[0], "cat") == 0)
             cat(argv, *argc);
-        else if(strcmp(argv[0], "clear") == 0) 
+        else if(strcmp(argv[0], "clear") == 0)
+            cd(argv, *argc, cDir);
+        else if(strcmp(argv[0], "clear") == 0)
             clear();
-        else if(strcmp(argv[0], "cp") == 0) 
+        else if(strcmp(argv[0], "cp") == 0)
             cp(argv);
-        else if(strcmp(argv[0], "diff") == 0) 
+        else if(strcmp(argv[0], "diff") == 0)
             diff(argv, *argc);
-        else if(strcmp(argv[0], "echo") == 0) 
+        else if(strcmp(argv[0], "echo") == 0)
             echo(command);
-        else if(strcmp(argv[0], "env") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "env") == 0)
             env(argv, *argc);
-        }
         else if(strcmp(argv[0], "exit") == 0)
             return 0;
         else if(strcmp(argv[0], "grep") == 0)
             grep(argv, *argc);
-        else if(strcmp(argv[0], "help") == 0) {
+        else if(strcmp(argv[0], "help") == 0)
             //TODO update this
             printf("cat filename\n"
                    "cd directory_name\n"
@@ -58,35 +58,22 @@ int main() {
                    "stat file_or_directory_name\n"
                    "timeout seconds command\n"
                    "wait process_id\n");
-        }
-        else if(strcmp(argv[0], "kill") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "kill") == 0)
             kill(argv, *argc);
-        }
         else if(strcmp(argv[0], "ls") == 0)
             ls();
         else if(strcmp(argv[0], "mkdir") == 0)
             mkdir(argv, *argc);
-        else if(strcmp(argv[0], "rmdir") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "rmdir") == 0)
             rmdir(argv, *argc);
-        }
-        else if(strcmp(argv[0], "sleep") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "sleep") == 0)
             sleep(argv, *argc);
-        }
-        else if(strcmp(argv[0], "stat") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "stat") == 0)
             stat(argv, *argc);
-        }
-        else if(strcmp(argv[0], "timeout") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "timeout") == 0)
             timeout(argv, *argc);
-        }
-        else if(strcmp(argv[0], "wait") == 0) {
-            printf("%s not created yet", argv[0]);
+        else if(strcmp(argv[0], "wait") == 0)
             wait(argv, *argc);
-        }
         else
             printf("Command not recognised, type help for valid commands\n");
     } while(true);

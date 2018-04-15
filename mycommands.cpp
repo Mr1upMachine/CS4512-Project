@@ -59,6 +59,10 @@ int cat(char *argv[], int argc) {
     return 0;
 }
 
+int cd(char *argv[], int argc, char *cDir) {
+    printf("%s not created yet", argv[0]);
+}
+
 int clear() {
     printf("\033[2J"); //clears terminal for Linux
     return 0;
@@ -135,7 +139,7 @@ int echo(char *command) {
 }
 
 int env(char *argv[], int argc) {
-    
+    printf("%s not created yet", argv[0]);
 }
 
 int grep(char *argv[], int argc) {
@@ -163,7 +167,7 @@ int grep(char *argv[], int argc) {
 }
 
 int kill(char *argv[], int argc) {
-    
+    printf("%s not created yet", argv[0]);
 }
 
 int ls() {
@@ -178,7 +182,6 @@ int ls() {
         }
         closedir(d);
     }
-    printf("\n");
     return 0;
 }
 
@@ -190,23 +193,23 @@ int mkdir(char *argv[], int argc) {
 }
 
 int rmdir(char *argv[], int argc) {
-
+    printf("%s not created yet", argv[0]);
 }
 
 int sleep(char *argv[], int argc) {
-
+    printf("%s not created yet", argv[0]);
 }
 
 int stat(char *argv[], int argc) {
-
+    printf("%s not created yet", argv[0]);
 }
 
 int timeout(char *argv[], int argc) {
-
+    printf("%s not created yet", argv[0]);
 }
 
 int wait(char *argv[], int argc) {
-
+    printf("%s not created yet", argv[0]);
 }
 
 
