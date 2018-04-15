@@ -60,15 +60,12 @@ int cat(char *argv[], int argc) {
     return 0;
 }
 
-int cd(char *argv[], int argc, char *cDir) {
-    char nDir[STR_BUFSIZE];
-    dirBuilder(nDir, cDir, argv[1]);
-    strcpy(cDir, nDir);
+int cd(char *argv[], char *cDir) {
+    cDir = dirBuilder(cDir, argv[1]);
 }
 
-int clear() {
+void clear() {
     printf("\033[2J"); //clears terminal for Linux
-    return 0;
 }
 
 int cp(char *argv[]) {
@@ -168,6 +165,27 @@ int grep(char *argv[], int argc) {
     return 0;
 }
 
+void help() {
+    printf("cat filename\n"
+           "cd directory_name\n"
+           "clear\n"
+           "cp file1 file2\n"
+           "diff file1 file2\n"
+           "echo [string]\n"
+           "env\n"
+           "exit\n"
+           "grep pattern file1 file2 ...\n"
+           "kill signal_number process_id\n"
+           "help\n"
+           "ls\n"
+           "mkdir directory_name\n"
+           "rmdir directory_name\n"
+           "sleep time\n"
+           "stat file_or_directory_name\n"
+           "timeout seconds command\n"
+           "wait process_id\n");
+}
+
 int kill(char *argv[], int argc) {
     printf("%s not created yet", argv[0]);
 }
@@ -188,8 +206,7 @@ int ls(char *cDir) {
 }
 
 int mkdir(char *argv[], int argc, char *cDir) {
-    char nDir[STR_BUFSIZE];
-    dirBuilder(nDir, cDir, argv[1]);
+    char* nDir = dirBuilder(cDir, argv[1]);
 
     if(mkdir(nDir, 0777) == 0)
         return 0;
@@ -219,32 +236,31 @@ int wait(char *argv[], int argc) {
 
 
 //Utility methods
-int dirBuilder(char *nDir, char *cDir, char *dest) {
+char* dirBuilder(char *cDir, char *dest) {
     //TODO .. does not work with chaining
     //TODO mystery character at end of return string
     if(dest[0] == '~') { //home path
-        strcpy(nDir, getenv("HOME"));
-        return 0;
+        return getenv("HOME");
+    }
+    else if(dest[0] == '/') { //absolute path
+        return dest;
     }
 
-    if(dest[0] == '/') { //absolute path
-        strcpy(nDir, cDir);
-        return 0;
-    }
-    else if(dest[0] == '.' && dest[1] == '.') { //parent path
+    char *nDir;
+
+    if(dest[0] == '.' && dest[1] == '.') { //parent path
         int index = -1;
         const size_t len = strlen(cDir)-1;
         for (int i = 0; i < len; i++)
             if (cDir[i] == '/')
                 index = i;
         strncpy(nDir, cDir, index);
-        return 0;
+        return nDir;
     }
     else {
-        strcpy(nDir, cDir);
+        strncpy(nDir, cDir, strlen(cDir));
         strcat(nDir, dest);
-        return 0;
+        return nDir;
     }
-    return -1;
 
 }

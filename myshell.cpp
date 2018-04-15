@@ -23,7 +23,7 @@ int main() {
         else if(strcmp(argv[0], "cat") == 0)
             cat(argv, *argc);
         else if(strcmp(argv[0], "cd") == 0)
-            cd(argv, *argc, cDir);
+            cd(argv, cDir);
         else if(strcmp(argv[0], "clear") == 0)
             clear();
         else if(strcmp(argv[0], "cp") == 0)
@@ -39,24 +39,7 @@ int main() {
         else if(strcmp(argv[0], "grep") == 0)
             grep(argv, *argc);
         else if(strcmp(argv[0], "help") == 0)
-            printf("cat filename\n"
-                   "cd directory_name\n"
-                   "clear\n"
-                   "cp file1 file2\n"
-                   "diff file1 file2\n"
-                   "echo [string]\n"
-                   "env\n"
-                   "exit\n"
-                   "grep pattern file1 file2 ...\n"
-                   "kill signal_number process_id\n"
-                   "help\n"
-                   "ls\n"
-                   "mkdir directory_name\n"
-                   "rmdir directory_name\n"
-                   "sleep time\n"
-                   "stat file_or_directory_name\n"
-                   "timeout seconds command\n"
-                   "wait process_id\n");
+            help();
         else if(strcmp(argv[0], "kill") == 0)
             kill(argv, *argc);
         else if(strcmp(argv[0], "ls") == 0)

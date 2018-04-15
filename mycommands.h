@@ -18,10 +18,11 @@
 //Postcondition: preforms cat command and returns 0 if successful or other if task not preformed
 int cat(char *argv[], int argc);
 
-int cd(char *argv[], int argc, char *cDir);
+//TODO do this
+int cd(char *argv[], char *cDir);
 
 //Postcondition: clears out the terminal's current text
-int clear();
+void clear();
 
 //Postcondition: preforms cp command and returns 0 if successful or other if task not preformed
 int cp(char *argv[]);
@@ -36,6 +37,8 @@ int env(char *argv[], int argc);
 
 //Postcondition: preforms grep command and returns 0 if successful or other if task not preformed
 int grep(char *argv[], int argc);
+
+void help();
 
 //TODO do this
 int kill(char *argv[], int argc);
@@ -65,4 +68,4 @@ int wait(char *argv[], int argc);
 
 //Utility methods
 //Postcondition: returns 0 if successful
-int dirBuilder(char* nDir, char *cDir, char *dest);
+char* dirBuilder(char *cDir, char *dest);
