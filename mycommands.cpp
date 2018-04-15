@@ -282,7 +282,7 @@ char* dirBuilder(char *cDir, char *dest) {
         if(strcmp(cDir, "/") != 0)
             strcpy(nDir, cDir);
         strcat(nDir, "/");
-        if(dest[0] == '.')
+        if(dest[0] == '.') //TODO Bug where just a . by itself adds a / to string
             strcat(nDir, dest+2);
         else
             strcat(nDir, dest);
