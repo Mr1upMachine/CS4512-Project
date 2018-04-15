@@ -10,6 +10,11 @@
 #define COLOR_WHITE   "\u001b[37m"
 #define COLOR_RESET   "\x1b[0m"
 
+//General constants
+#define STR_BUFSIZE 1024
+#define TOKEN_BUFSIZE 64
+#define TOKEN_DELIM " \t\r\n\a"
+
 //Postcondition: preforms cat command and returns 0 if successful or other if task not preformed
 int cat(char *argv[], int argc);
 
@@ -36,13 +41,13 @@ int grep(char *argv[], int argc);
 int kill(char *argv[], int argc);
 
 //Postcondition: preforms ls command and returns 0 if successful or other if task not preformed
-int ls();
+int ls(char *cDir);
 
 //TODO do this
-int mkdir(char *argv[], int argc);
+int mkdir(char *argv[], int argc, char *cDir);
 
 //TODO do this
-int rmdir(char *argv[], int argc);
+int rmdir(char *argv[], int argc, char *cDir);
 
 //TODO do this
 int sleep(char *argv[], int argc);
@@ -59,5 +64,5 @@ int wait(char *argv[], int argc);
 
 
 //Utility methods
-//Postcondition: returns 0 if valid
-int isValidDir(char path[]);
+//Postcondition: returns 0 if successful
+int dirBuilder(char* nDir, char *cDir, char *dest);

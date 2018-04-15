@@ -22,7 +22,7 @@ int main() {
             continue;
         else if(strcmp(argv[0], "cat") == 0)
             cat(argv, *argc);
-        else if(strcmp(argv[0], "clear") == 0)
+        else if(strcmp(argv[0], "cd") == 0)
             cd(argv, *argc, cDir);
         else if(strcmp(argv[0], "clear") == 0)
             clear();
@@ -39,7 +39,6 @@ int main() {
         else if(strcmp(argv[0], "grep") == 0)
             grep(argv, *argc);
         else if(strcmp(argv[0], "help") == 0)
-            //TODO update this
             printf("cat filename\n"
                    "cd directory_name\n"
                    "clear\n"
@@ -61,11 +60,11 @@ int main() {
         else if(strcmp(argv[0], "kill") == 0)
             kill(argv, *argc);
         else if(strcmp(argv[0], "ls") == 0)
-            ls();
+            ls(cDir);
         else if(strcmp(argv[0], "mkdir") == 0)
-            mkdir(argv, *argc);
+            mkdir(argv, *argc, cDir);
         else if(strcmp(argv[0], "rmdir") == 0)
-            rmdir(argv, *argc);
+            rmdir(argv, *argc, cDir);
         else if(strcmp(argv[0], "sleep") == 0)
             sleep(argv, *argc);
         else if(strcmp(argv[0], "stat") == 0)
@@ -79,15 +78,12 @@ int main() {
     } while(true);
 }
 
-#define LINE_BUFSIZE 1024
 char *read_line(void) {
-    char *line = (char*)malloc(LINE_BUFSIZE);
-    fgets(line, LINE_BUFSIZE, stdin);
+    char *line = (char*)malloc(STR_BUFSIZE);
+    fgets(line, STR_BUFSIZE, stdin);
     return line;
 }
 
-#define TOKEN_BUFSIZE 64
-#define TOKEN_DELIM " \t\r\n\a"
 char **split_args(char *command, int *argc) {
     char *cmdcopy = strdup(command); //deep copy
     int i = 0;
