@@ -48,10 +48,8 @@ int kill(char *argv[], int argc);
 //Postcondition: preforms ls command and returns 0 if successful or other if task not preformed
 int ls(char *cDir);
 
-//TODO do this
 int mkdir(char *argv[], int argc, char *cDir);
 
-//TODO do this
 int rmdir(char *argv[], int argc, char *cDir);
 
 //TODO do this

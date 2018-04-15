@@ -1,7 +1,8 @@
+#include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "mycommands.h"
@@ -230,7 +231,10 @@ int mkdir(char *argv[], int argc, char *cDir) {
 }
 
 int rmdir(char *argv[], int argc, char *cDir) {
-    printf("%s not created yet", argv[0]);
+    if( rmdir(dirBuilder(cDir, argv[1])) == 0 )
+        return 0;
+    printf("Directory \"%s\" does not exist\n", argv[1]);
+    return -1;
 }
 
 int sleep(char *argv[], int argc) {
@@ -252,7 +256,7 @@ int wait(char *argv[], int argc) {
 
 //Utility methods
 char* dirBuilder(char *cDir, char *dest) {
-    //TODO .. does not work with chaining, create better parsing algo that transforms path all at once
+    //TODO .. and ~ does not work with chaining, create better parsing algo that transforms path all at once
     if(dest[0] == '~') { //home path
         return getenv("HOME");
     }
@@ -278,12 +282,16 @@ char* dirBuilder(char *cDir, char *dest) {
         if(strcmp(cDir, "/") != 0)
             strcpy(nDir, cDir);
         strcat(nDir, "/");
-        strcat(nDir, dest);
+        if(dest[0] == '.')
+            strcat(nDir, dest+2);
+        else
+            strcat(nDir, dest);
         return nDir;
     }
 
 }
 
+//doesnt work to my knowledge
 int isDirectory(const char *path) {
     struct stat statbuf;
     if (stat(path, &statbuf) != 0)
