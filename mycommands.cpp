@@ -178,6 +178,7 @@ int ls() {
         }
         closedir(d);
     }
+    printf("\n");
     return 0;
 }
 

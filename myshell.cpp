@@ -63,13 +63,10 @@ int main() {
             printf("%s not created yet", argv[0]);
             kill(argv, *argc);
         }
-        else if(strcmp(argv[0], "ls") == 0) {
+        else if(strcmp(argv[0], "ls") == 0)
             ls();
-            printf("\n");
-        }
-        else if(strcmp(argv[0], "mkdir") == 0) {
+        else if(strcmp(argv[0], "mkdir") == 0)
             mkdir(argv, *argc);
-        }
         else if(strcmp(argv[0], "rmdir") == 0) {
             printf("%s not created yet", argv[0]);
             rmdir(argv, *argc);
