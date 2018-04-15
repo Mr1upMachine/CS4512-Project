@@ -1,14 +1,17 @@
 //Colors
-#define COLOR_BLACK   "\u001b[30m"
-#define COLOR_RED     "\u001b[31m"
-#define COLOR_RED_BR  "\u001b[31m;1m"
-#define COLOR_GREEN   "\u001b[32m"
-#define COLOR_YELLOW  "\u001b[33m"
-#define COLOR_BLUE    "\u001b[34m"
-#define COLOR_MAGENTA "\u001b[35m"
-#define COLOR_CYAN    "\u001b[36m"
-#define COLOR_WHITE   "\u001b[37m"
-#define COLOR_RESET   "\x1b[0m"
+#define COLOR_BLACK     "\e[30m"
+#define COLOR_RED       "\e[31m"
+#define COLOR_RED_BR    "\e[31m;1m"
+#define COLOR_GREEN     "\e[32m"
+#define COLOR_GREEN_BR  "\e[92m"
+#define COLOR_YELLOW    "\e[33m"
+#define COLOR_BLUE      "\e[34m"
+#define COLOR_MAGENTA   "\e[35m"
+#define COLOR_CYAN      "\e[36m"
+#define COLOR_WHITE     "\e[37m"
+#define COLOR_RESET     "\e[39m"
+#define BG_COLOR_GREY   "\e[100m"
+#define BG_COLOR_RESET  "\e[49m"
 
 //General constants & structs
 #define STR_BUFSIZE 1024
@@ -68,3 +71,5 @@ int wait(char *argv[], int argc);
 //Utility methods
 //Postcondition: returns 0 if successful
 char* dirBuilder(char *cDir, char *dest);
+
+int isDirectory(const char *path);

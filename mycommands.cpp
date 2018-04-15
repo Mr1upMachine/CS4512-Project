@@ -8,6 +8,7 @@
 
 struct stat info;
 
+//TODO fix to work with directory support
 int cat(char *argv[], int argc) {
     if(strcmp(argv[argc - 2], ">") == 0) {
         FILE *output;
@@ -78,6 +79,7 @@ void clear() {
     printf("\033[2J"); //clears terminal for Linux
 }
 
+//TODO fix to work with directory support
 int cp(char *argv[]) {
     FILE *fptr1, *fptr2;
     char c;
@@ -108,6 +110,7 @@ int cp(char *argv[]) {
     return 0;
 }
 
+//TODO fix to work with directory support
 int diff(char *argv[], int argc) {
     FILE *fp1, *fp2;
     char filebuff[STR_BUFSIZE];
@@ -151,6 +154,7 @@ int env(char *argv[], int argc) {
     printf("%s not created yet", argv[0]);
 }
 
+//TODO fix to work with directory support
 int grep(char *argv[], int argc) {
     for(int i=2; i<argc; i++) {
         FILE *fp;
@@ -204,6 +208,7 @@ int ls(char *cDir) {
     DIR *d;
     struct dirent *dir;
     d = opendir(cDir);
+    printf(COLOR_GREEN_BR);
     if (d) {
         while ((dir = readdir(d)) != NULL) {
             if(strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0) {
@@ -212,7 +217,7 @@ int ls(char *cDir) {
         }
         closedir(d);
     }
-    printf("\n");
+    printf(COLOR_RESET "\n");
     return 0;
 }
 
@@ -276,4 +281,11 @@ char* dirBuilder(char *cDir, char *dest) {
         return nDir;
     }
 
+}
+
+int isDirectory(const char *path) {
+    struct stat statbuf;
+    if (stat(path, &statbuf) != 0)
+        return 0;
+    return S_ISDIR(statbuf.st_mode);
 }
