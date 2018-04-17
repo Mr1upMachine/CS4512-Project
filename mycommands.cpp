@@ -149,7 +149,7 @@ int echo(char *command) {
 }
 
 int env() {
-    printf("%s not created yet", argv[0]);
+    printf("env not created yet");
 }
 
 int grep(char *argv[], int argc, char *cDir) {
