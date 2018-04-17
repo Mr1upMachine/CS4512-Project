@@ -19,7 +19,7 @@
 #define TOKEN_DELIM " \t\r\n\a"
 
 //Postcondition: preforms cat command and returns 0 if successful or other if task not preformed
-int cat(char *argv[], int argc);
+int cat(char *argv[], int argc, char *cDir);
 
 int cd(char *argv[], char *cDir);
 
@@ -27,23 +27,23 @@ int cd(char *argv[], char *cDir);
 void clear();
 
 //Postcondition: preforms cp command and returns 0 if successful or other if task not preformed
-int cp(char *argv[]);
+int cp(char *argv[], char *cDir);
 
-int diff(char *argv[], int argc);
+int diff(char *argv[], int argc, char *cDir);
 
 //repeats the text on the line below it
 int echo(char *command);
 
 //TODO do this
-int env(char *argv[], int argc);
+int env();
 
 //Postcondition: preforms grep command and returns 0 if successful or other if task not preformed
-int grep(char *argv[], int argc);
+int grep(char *argv[], int argc, char *cDir);
 
 void help();
 
 //TODO do this
-int kill(char *argv[], int argc);
+int kill(char *argv[]);
 
 //Postcondition: preforms ls command and returns 0 if successful or other if task not preformed
 int ls(char *cDir);
@@ -53,7 +53,7 @@ int mkdir(char *argv[], int argc, char *cDir);
 int rmdir(char *argv[], int argc, char *cDir);
 
 //TODO do this
-int sleep(char *argv[], int argc);
+int sleep(char *argv[]);
 
 //TODO do this
 int stat(char *argv[], int argc);
@@ -62,12 +62,12 @@ int stat(char *argv[], int argc);
 int timeout(char *argv[], int argc);
 
 //TODO do this
-int wait(char *argv[], int argc);
+int wait(char *argv[]);
 
 
 
 //Utility methods
-//Postcondition: returns 0 if successful
+//Postcondition: returns new directory
 char* dirBuilder(char *cDir, char *dest);
 
 //doesn't seem to work?

@@ -9,11 +9,10 @@
 
 struct stat info;
 
-//TODO fix to work with directory support
-int cat(char *argv[], int argc) {
+int cat(char *argv[], int argc, char *cDir) {
     if(strcmp(argv[argc - 2], ">") == 0) {
         FILE *output;
-        output = fopen(argv[argc - 1], "w");
+        output = fopen( dirBuilder(cDir, argv[argc - 1]), "w" );
         if (output == NULL) {
             printf("cat: Output file cannot be opened");
             return 1;
@@ -24,7 +23,7 @@ int cat(char *argv[], int argc) {
             FILE *input;
             char c;
             // Open first file for reading
-            input = fopen(argv[i], "r");
+            input = fopen( dirBuilder(cDir, argv[i]), "r" );
             if (input == NULL) {
                 printf("cat: %s: No such file or directory\n", argv[i]);
                 return 1;
@@ -45,7 +44,7 @@ int cat(char *argv[], int argc) {
             FILE *input;
             char c;
             // Open first file for reading
-            input = fopen(argv[i], "r");
+            input = fopen( dirBuilder(cDir, argv[i]), "r" );
             if (input == NULL) {
                 printf("cat: %s: No such file or directory\n", argv[i]);
                 return 1;
@@ -58,9 +57,9 @@ int cat(char *argv[], int argc) {
             }
 
             fclose(input);
-            printf("\n");
         }
     }
+    printf("\n");
     return 0;
 }
 
@@ -80,20 +79,19 @@ void clear() {
     printf("\033[2J"); //clears terminal for Linux
 }
 
-//TODO fix to work with directory support
-int cp(char *argv[]) {
+int cp(char *argv[], char *cDir) {
     FILE *fptr1, *fptr2;
     char c;
 
     // Open first file for reading
-    fptr1 = fopen(argv[1], "r");
+    fptr1 = fopen( dirBuilder(cDir, argv[1]), "r" );
     if (fptr1 == NULL) {
         printf("Cannot find file %s \n", argv[1]);
         return 1;
     }
 
     // Opens other file for writing
-    fptr2 = fopen(argv[2], "w");
+    fptr2 = fopen( dirBuilder(cDir, argv[2]), "w" );
     if (fptr2 == NULL) {
         printf("Cannot open file %s \n", argv[2]);
         return 1;
@@ -111,15 +109,14 @@ int cp(char *argv[]) {
     return 0;
 }
 
-//TODO fix to work with directory support
-int diff(char *argv[], int argc) {
+int diff(char *argv[], int argc, char *cDir) {
     FILE *fp1, *fp2;
     char filebuff[STR_BUFSIZE];
     char filebuff2[STR_BUFSIZE];
     int linecount = 0;
 
-    fp1 = fopen(argv[1], "r");
-    fp2 = fopen(argv[2], "r");
+    fp1 = fopen( dirBuilder(cDir, argv[1]), "r" );
+    fp2 = fopen( dirBuilder(cDir, argv[2]), "r" );
 
     if(argc != 3)
     {
@@ -134,7 +131,7 @@ int diff(char *argv[], int argc) {
         printf("File %s not found", argv[2]);
 
 
-    while (((fgets(filebuff, STR_BUFSIZE, fp1)) && (fgets(filebuff2, STR_BUFSIZE, fp2)))) { //TODO check if this still works
+    while (((fgets(filebuff, STR_BUFSIZE, fp1)) && (fgets(filebuff2, STR_BUFSIZE, fp2)))) {
         if (strcmp(filebuff, filebuff2) != 0){
             printf("The files differ on line: %i\n", linecount);
             printf("File 1: %s\nFile 2: %s", filebuff, filebuff2);
@@ -151,19 +148,18 @@ int echo(char *command) {
     return 0;
 }
 
-int env(char *argv[], int argc) {
+int env() {
     printf("%s not created yet", argv[0]);
 }
 
-//TODO fix to work with directory support
-int grep(char *argv[], int argc) {
+int grep(char *argv[], int argc, char *cDir) {
     for(int i=2; i<argc; i++) {
         FILE *fp;
         char *line = NULL;
         size_t len = 0;
         ssize_t read;
 
-        fp = fopen(argv[i], "r");
+        fp = fopen( dirBuilder(cDir, argv[i]), "r" );
         if (fp == NULL) {
             printf("File %s not found", argv[i]);
             return 1;
@@ -201,7 +197,7 @@ void help() {
            "wait process_id\n");
 }
 
-int kill(char *argv[], int argc) {
+int kill(char *argv[]) {
     printf("%s not created yet", argv[0]);
 }
 
@@ -222,7 +218,6 @@ int ls(char *cDir) {
     return 0;
 }
 
-//TODO verify if directory support works
 int mkdir(char *argv[], int argc, char *cDir) {
     if( mkdir(dirBuilder(cDir, argv[1]), 0777) == 0 )
         return 0;
@@ -237,7 +232,7 @@ int rmdir(char *argv[], int argc, char *cDir) {
     return -1;
 }
 
-int sleep(char *argv[], int argc) {
+int sleep(char *argv[]) {
     printf("%s not created yet", argv[0]);
 }
 
@@ -249,7 +244,7 @@ int timeout(char *argv[], int argc) {
     printf("%s not created yet", argv[0]);
 }
 
-int wait(char *argv[], int argc) {
+int wait(char *argv[]) {
     printf("%s not created yet", argv[0]);
 }
 
@@ -257,12 +252,10 @@ int wait(char *argv[], int argc) {
 //Utility methods
 char* dirBuilder(char *cDir, char *dest) {
     //TODO .. and ~ does not work with chaining, create better parsing algo that transforms path all at once
-    if(dest[0] == '~') { //home path
+    if(dest[0] == '~') //home path
         return getenv("HOME");
-    }
-    else if(dest[0] == '/') { //absolute path
+    else if(dest[0] == '/') //absolute path
         return dest;
-    }
 
     char *nDir = (char*)malloc(sizeof(char) * STR_BUFSIZE);
 
@@ -291,8 +284,8 @@ char* dirBuilder(char *cDir, char *dest) {
 
 }
 
-//doesnt work to my knowledge
-int isDirectory(const char *path) {
+//TODO doesnt work to my knowledge
+int isValidDir(const char *path) {
     struct stat statbuf;
     if (stat(path, &statbuf) != 0)
         return 0;
