@@ -68,7 +68,7 @@ int wait(char *argv[]);
 
 //Utility methods
 //Postcondition: returns new directory
-char* dirBuilder(char *cDir, char *dest);
+char* dirBuilder(char *cDir, char *target);
 
 //doesn't seem to work?
 int isDirectory(const char *path);

@@ -250,16 +250,16 @@ int wait(char *argv[]) {
 
 
 //Utility methods
-char* dirBuilder(char *cDir, char *dest) {
+char* dirBuilder(char *cDir, char *target) {
     //TODO .. and ~ does not work with chaining, create better parsing algo that transforms path all at once
-    if(dest[0] == '~') //home path
+    if(target[0] == '~') //home path
         return getenv("HOME");
-    else if(dest[0] == '/') //absolute path
-        return dest;
+    else if(target[0] == '/') //absolute path
+        return target;
 
     char *nDir = (char*)malloc(sizeof(char) * STR_BUFSIZE);
 
-    if(dest[0] == '.' && dest[1] == '.') { //parent path
+    if(target[0] == '.' && target[1] == '.') { //parent path
         int index = -1;
         const size_t len = strlen(cDir)-1;
         for (int i = 0; i < len; i++)
@@ -275,10 +275,10 @@ char* dirBuilder(char *cDir, char *dest) {
         if(strcmp(cDir, "/") != 0)
             strcpy(nDir, cDir);
         strcat(nDir, "/");
-        if(dest[0] == '.') //TODO Bug where just a . by itself adds a / to string
-            strcat(nDir, dest+2);
+        if(target[0] == '.') //TODO Bug where just a . by itself adds a / to string
+            strcat(nDir, target+2);
         else
-            strcat(nDir, dest);
+            strcat(nDir, target);
         return nDir;
     }
 
