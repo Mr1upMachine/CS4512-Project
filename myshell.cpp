@@ -20,41 +20,41 @@ int main() {
 
         if(*argc == 0)
             continue;
-        else if(strcmp(argv[0], "cat") == 0)
+        else if(!strcmp(argv[0], "cat"))
             cat(argv, *argc, cDir);
-        else if(strcmp(argv[0], "cd") == 0)
+        else if(!strcmp(argv[0], "cd"))
             cd(argv, cDir);
-        else if(strcmp(argv[0], "clear") == 0)
+        else if(!strcmp(argv[0], "clear"))
             clear();
-        else if(strcmp(argv[0], "cp") == 0)
+        else if(!strcmp(argv[0], "cp"))
             cp(argv, cDir);
-        else if(strcmp(argv[0], "diff") == 0)
+        else if(!strcmp(argv[0], "diff"))
             diff(argv, *argc, cDir);
-        else if(strcmp(argv[0], "echo") == 0)
+        else if(!strcmp(argv[0], "echo"))
             echo(command);
-        else if(strcmp(argv[0], "env") == 0)
+        else if(!strcmp(argv[0], "env"))
             env();
-        else if(strcmp(argv[0], "exit") == 0)
+        else if(!strcmp(argv[0], "exit"))
             return 0;
-        else if(strcmp(argv[0], "grep") == 0)
+        else if(!strcmp(argv[0], "grep"))
             grep(argv, *argc, cDir);
-        else if(strcmp(argv[0], "help") == 0)
+        else if(!strcmp(argv[0], "help"))
             help();
-        else if(strcmp(argv[0], "kill") == 0)
+        else if(!strcmp(argv[0], "kill"))
             kill(argv);
-        else if(strcmp(argv[0], "ls") == 0)
+        else if(!strcmp(argv[0], "ls"))
             ls(cDir);
-        else if(strcmp(argv[0], "mkdir") == 0)
+        else if(!strcmp(argv[0], "mkdir"))
             mkdir(argv, *argc, cDir);
-        else if(strcmp(argv[0], "rmdir") == 0)
+        else if(!strcmp(argv[0], "rmdir"))
             rmdir(argv, *argc, cDir);
-        else if(strcmp(argv[0], "sleep") == 0)
+        else if(!strcmp(argv[0], "sleep"))
             sleep(argv);
-        else if(strcmp(argv[0], "stat") == 0)
+        else if(!strcmp(argv[0], "stat"))
             stat(argv, *argc);
-        else if(strcmp(argv[0], "timeout") == 0)
+        else if(!strcmp(argv[0], "timeout"))
             timeout(argv, *argc);
-        else if(strcmp(argv[0], "wait") == 0)
+        else if(!strcmp(argv[0], "wait"))
             wait(argv);
         else
             printf("Command not recognised, type \"help\" for valid commands\n");
