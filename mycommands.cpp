@@ -9,6 +9,49 @@
 
 struct stat info;
 
+
+int run_command(char command[], char *argv[], int argc, char *cDir) {
+    if(!strcmp(argv[0], "cat"))
+        cat(argv, argc, cDir);
+    else if(!strcmp(argv[0], "cd"))
+        cd(argv, cDir);
+    else if(!strcmp(argv[0], "clear"))
+        clear();
+    else if(!strcmp(argv[0], "cp"))
+        cp(argv, cDir);
+    else if(!strcmp(argv[0], "diff"))
+        diff(argv, argc, cDir);
+    else if(!strcmp(argv[0], "echo"))
+        echo(command);
+    else if(!strcmp(argv[0], "env"))
+        env();
+    else if(!strcmp(argv[0], "exit"))
+        return -1;
+    else if(!strcmp(argv[0], "grep"))
+        grep(argv, argc, cDir);
+    else if(!strcmp(argv[0], "help"))
+        help();
+    else if(!strcmp(argv[0], "kill"))
+        kill(argv);
+    else if(!strcmp(argv[0], "ls"))
+        ls(cDir);
+    else if(!strcmp(argv[0], "mkdir"))
+        mkdir(argv, argc, cDir);
+    else if(!strcmp(argv[0], "rmdir"))
+        rmdir(argv, argc, cDir);
+    else if(!strcmp(argv[0], "sleep"))
+        sleep(argv);
+    else if(!strcmp(argv[0], "stat"))
+        stat(argv, argc);
+    else if(!strcmp(argv[0], "timeout"))
+        timeout(argv, argc);
+    else if(!strcmp(argv[0], "wait"))
+        wait(argv);
+    else
+        printf("Command not recognised, type \"help\" for valid commands\n");
+}
+
+
 int cat(char *argv[], int argc, char *cDir) {
     if(strcmp(argv[argc - 2], ">") == 0) {
         FILE *output;

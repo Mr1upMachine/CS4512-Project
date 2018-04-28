@@ -18,6 +18,10 @@
 #define TOKEN_BUFSIZE 64
 #define TOKEN_DELIM " \t\r\n\a"
 
+
+int run_command(char command[], char *argv[], int argc, char *cDir);
+
+
 //Postcondition: preforms cat command and returns 0 if successful or other if task not preformed
 int cat(char *argv[], int argc, char *cDir);
 
