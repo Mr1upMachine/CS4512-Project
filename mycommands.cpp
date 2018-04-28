@@ -10,7 +10,7 @@
 struct stat info;
 
 
-int run_command(char command[], char *argv[], int argc, char *cDir) {
+int run_command(char *command, char *argv[], int argc, char *cDir) {
     if(!strcmp(argv[0], "cat"))
         cat(argv, argc, cDir);
     else if(!strcmp(argv[0], "cd"))
