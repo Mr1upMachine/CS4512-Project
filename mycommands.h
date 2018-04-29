@@ -38,7 +38,7 @@ int diff(char *argv[], int argc, char *cDir);
 //repeats the text on the line below it
 int echo(char *command);
 
-//TODO do this
+//prints environmental variables
 int env();
 
 //Postcondition: preforms grep command and returns 0 if successful or other if task not preformed
