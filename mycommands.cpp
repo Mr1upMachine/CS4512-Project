@@ -51,7 +51,6 @@ int run_command(char *command, char *argv[], int argc, char *cDir) {
         printf("Command not recognised, type \"help\" for valid commands\n");
 }
 
-
 int cat(char *argv[], int argc, char *cDir) {
     if(strcmp(argv[argc - 2], ">") == 0) {
         FILE *output;
@@ -192,7 +191,12 @@ int echo(char *command) {
 }
 
 int env() {
-    printf("env not created yet");
+	extern char **environ;
+	int i = 0;
+	while(environ[i]) {
+  	printf("%s\n", environ[i++]); // prints in form of "variable=value"
+	}
+	  
 }
 
 int grep(char *argv[], int argc, char *cDir) {
