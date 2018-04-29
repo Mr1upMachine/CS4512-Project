@@ -276,7 +276,8 @@ int rmdir(char *argv[], int argc, char *cDir) {
 }
 
 int sleep(char *argv[]) {
-    printf("%s not created yet", argv[0]);
+     int x = atoi(argv[1]);
+        sleep(x);
 }
 
 int stat(char *argv[], int argc) {
