@@ -285,30 +285,44 @@ int sleep(char *argv[]) {
 }
 
 int stat(char *argv[], int argc) {
-        //printf("%s not created yet", argv[0]);
-/*
+    struct stat s;
 
-	char *f = argv[1];
-        struct stat *buf;     struct tm dt;
+           if (argc != 2) {
+               exit(EXIT_FAILURE);
+           }
 
+           if (lstat(argv[1], &s) == -1) {
+               perror("lstat");
+               exit(EXIT_FAILURE);
+           }
 
-	buf =  malloc(sizeof(struct stat));
+           printf("File:%s\n ", argv[1]);
+	   printf("Size:%lld bytes\n", (long long) s.st_size); 
+           printf("Blocks:%lld\n",(long long) s.st_blocks);
+	   printf("I/O block:%ld bytes\n", (long) s.st_blksize); 
+	   printf("File type:");
 
-	stat(f, buf);
-	int size = buf->st_size;
-	printf("Size:%d",size);
+		   switch (s.st_mode & S_IFMT) {
+		   case S_IFBLK:  printf("block device\n");            break;
+		   case S_IFCHR:  printf("character device\n");        break;
+		   case S_IFDIR:  printf("directory\n");               break;
+		   case S_IFIFO:  printf("FIFO/pipe\n");               break;
+		   case S_IFLNK:  printf("symlink\n");                 break;
+		   case S_IFREG:  printf("regular file\n");            break;
+		   case S_IFSOCK: printf("socket\n");                  break;
+		   default:       printf("unknown?\n");                break;
+           }
+           printf("Device:%ld\n", (long) s.st_dev);
+	   printf("Links:%ld\n", (long) s.st_nlink); 
+           printf("I-node:%ld\n", (long) s.st_ino);
+	   //TODO: Permissions?
+	   printf("UID:%ld\n",(long) s.st_uid);
+	   printf("GID:%ld\n",(long) s.st_gid);
+	   printf("Access:%s", ctime(&s.st_atime));
+           printf("Modify:%s", ctime(&s.st_mtime));
+           printf("Change:%s", ctime(&s.st_ctime));
 
-	free(buf);
-
-	//File Creation
-	dt = *(gmtime(&argv[1].st_ctime));
-    printf("\nBirth: %d-%d-%d %d:%d:%d", dt.tm_mday, dt.tm_mon, dt.tm_year + 1900, 
-                                              dt.tm_hour, dt.tm_min, dt.tm_sec);
-
-    // File modification time
-    dt = *(gmtime(&argv[1].st_mtime));
-    printf("\nModify: %d-%d-%d %d:%d:%d", dt.tm_mday, dt.tm_mon, dt.tm_year + 1900, 
-                                              dt.tm_hour, dt.tm_min, dt.tm_sec);*/
+           exit(EXIT_SUCCESS);
 }
 
 int timeout(char *argv[], int argc) {
