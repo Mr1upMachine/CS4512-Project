@@ -315,7 +315,7 @@ int stat(char *argv[], int argc) {
            printf("Device:%ld\n", (long) s.st_dev);
 	   printf("Links:%ld\n", (long) s.st_nlink); 
            printf("I-node:%ld\n", (long) s.st_ino);
-	   //TODO: Permissions?
+	   printf("Access:%ld\n", (long) s.st_mode);
 	   printf("UID:%ld\n",(long) s.st_uid);
 	   printf("GID:%ld\n",(long) s.st_gid);
 	   printf("Access:%s", ctime(&s.st_atime));
