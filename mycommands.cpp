@@ -285,7 +285,30 @@ int sleep(char *argv[]) {
 }
 
 int stat(char *argv[], int argc) {
-    printf("%s not created yet", argv[0]);
+        //printf("%s not created yet", argv[0]);
+/*
+
+	char *f = argv[1];
+        struct stat *buf;     struct tm dt;
+
+
+	buf =  malloc(sizeof(struct stat));
+
+	stat(f, buf);
+	int size = buf->st_size;
+	printf("Size:%d",size);
+
+	free(buf);
+
+	//File Creation
+	dt = *(gmtime(&argv[1].st_ctime));
+    printf("\nBirth: %d-%d-%d %d:%d:%d", dt.tm_mday, dt.tm_mon, dt.tm_year + 1900, 
+                                              dt.tm_hour, dt.tm_min, dt.tm_sec);
+
+    // File modification time
+    dt = *(gmtime(&argv[1].st_mtime));
+    printf("\nModify: %d-%d-%d %d:%d:%d", dt.tm_mday, dt.tm_mon, dt.tm_year + 1900, 
+                                              dt.tm_hour, dt.tm_min, dt.tm_sec);*/
 }
 
 int timeout(char *argv[], int argc) {
