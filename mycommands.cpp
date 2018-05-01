@@ -252,19 +252,19 @@ int kill(char *argv[]) {
 //SIGKILL
 if (sig == 9)
     {
-        kill(pid,SIGKILL);
+        kill(SIGKILL,pid);
     }
 
 //SIGTERM
 if (sig == 15)
     {
-        kill(pid,SIGTERM);
+        kill(SIGTERM,pid);
     }
 
 //SIGHUP
 if (sig == 1)
     {
-        kill(pid,SIGHUP);
+        kill(SIGHUP,pid);
     }
 	
 	
