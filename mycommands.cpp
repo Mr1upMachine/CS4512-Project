@@ -352,6 +352,7 @@ int timeout(char *argv[], int argc) {
 }
 
 int wait(char *argv[]) {
+	//Char to Int
    	int pid = atoi(argv[1]);
 	if(kill(pid,0) == 0)
 	{
