@@ -245,7 +245,29 @@ void help() {
 }
 
 int kill(char *argv[]) {
-    printf("%s not created yet", argv[0]);
+    
+    int pid = atoi(argv[1]);
+    int sig = atoi(argv[2]);
+
+//SIGKILL
+if (sig == 9)
+    {
+        kill(pid,SIGKILL);
+    }
+
+//SIGTERM
+if (sig == 15)
+    {
+        kill(pid,SIGTERM);
+    }
+
+//SIGHUP
+if (sig == 1)
+    {
+        kill(pid,SIGHUP);
+    }
+	
+	
 }
 
 int ls(char *cDir) {
@@ -330,7 +352,11 @@ int timeout(char *argv[], int argc) {
 }
 
 int wait(char *argv[]) {
-    printf("%s not created yet", argv[0]);
+   	int pid = atoi(argv[1]);
+	if(kill(pid,0) == 0)
+	{
+		sleep(1);
+	}
 }
 
 
