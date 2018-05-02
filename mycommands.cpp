@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "mycommands.h"
+#include <signal.h>
 
 struct stat info;
 
@@ -348,7 +349,23 @@ int stat(char *argv[], int argc) {
 }
 
 int timeout(char *argv[], int argc) {
-    printf("%s not created yet", argv[0]);
+       int pid;
+    pid = fork();
+    int time = atoi(argv[1]);
+    
+    if (pid == 0)
+        //exec Command
+    
+    if (pid < 0)
+        while(pid == 0)
+            for (int i = 0; i < time; i++)
+            {
+                sleep(1);
+            }
+    kill(SIGTERM,0);
+    
+    exit(1);
+    
 }
 
 int wait(char *argv[]) {
